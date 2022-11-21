@@ -1,6 +1,5 @@
 package food.domain;
 
-import food.domain.OrderFinished;
 import food.StoreApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -27,10 +26,6 @@ public class FoodCooking  {
 
     @PostPersist
     public void onPostPersist(){
-
-        OrderFinished orderFinished = new OrderFinished(this);
-        orderFinished.publishAfterCommit();
-
     }
 
     public static FoodCookingRepository repository(){
@@ -56,6 +51,11 @@ public class FoodCooking  {
     public void start(){
         OrderStarted orderStarted = new OrderStarted(this);
         orderStarted.publishAfterCommit();
+
+    }
+    public void finish(){
+        OrderFinished orderFinished = new OrderFinished(this);
+        orderFinished.publishAfterCommit();
 
     }
 
