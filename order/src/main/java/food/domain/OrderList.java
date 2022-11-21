@@ -62,12 +62,6 @@ public class OrderList  {
         //Following code causes dependency to external APIs
         // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
 
-        food.external.CancelPaymentCommand cancelPaymentCommand = new food.external.CancelPaymentCommand();
-        cancelPaymentCommand.setOrderId(String.valueOf(getId()));
-
-        // mappings goes here
-        OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
-            .cancelPayment(getId(), cancelPaymentCommand);
 
 
 

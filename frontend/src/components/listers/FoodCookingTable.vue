@@ -88,7 +88,7 @@
             this.values = temp.data._embedded.foodcookings;
 
             this.newValue = {
-                'orderId': 0,
+                'orderId': '',
                 'foodId': '',
                 'status': '',
                 'address': '',
