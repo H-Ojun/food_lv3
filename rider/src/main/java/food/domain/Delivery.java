@@ -1,7 +1,5 @@
 package food.domain;
 
-import food.domain.Picked;
-import food.domain.Delivered;
 import food.RiderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -44,16 +42,6 @@ public class Delivery  {
 
     @PostPersist
     public void onPostPersist(){
-
-
-        Picked picked = new Picked(this);
-        picked.publishAfterCommit();
-
-
-
-        Delivered delivered = new Delivered(this);
-        delivered.publishAfterCommit();
-
     }
 
     public static DeliveryRepository repository(){
@@ -63,6 +51,16 @@ public class Delivery  {
 
 
 
+    public void pick(){
+        Picked picked = new Picked(this);
+        picked.publishAfterCommit();
+
+    }
+    public void deliveryConfirm(){
+        Delivered delivered = new Delivered(this);
+        delivered.publishAfterCommit();
+
+    }
 
     public static void updateStatus(OrderFinished orderFinished){
 
