@@ -71,6 +71,7 @@
                 'foodId': '',
                 'address': '',
                 'status': '',
+                'customerId': '',
             }
         },
         methods:{

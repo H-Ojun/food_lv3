@@ -68,9 +68,9 @@
             me.values = temp.data._embedded.deliveries;
             
             me.newValue = {
-                'orderId': 0,
                 'address': '',
                 'status': '',
+                'orderId': '',
             }
         },
         methods:{
