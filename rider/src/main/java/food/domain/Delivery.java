@@ -1,7 +1,5 @@
 package food.domain;
 
-import food.domain.Picked;
-import food.domain.Delivered;
 import food.RiderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -26,23 +24,22 @@ public class Delivery  {
 
     @PostPersist
     public void onPostPersist(){
-
-        if ("OrderFinish".equals(status)) {
-            setStatus("Pick");
-            Picked picked = new Picked(this);
-            picked.publishAfterCommit();
-            repository().save(this);
-        } else if ("Pick".equals(status)) {
-            setStatus("Complete");
-            Delivered delivered = new Delivered(this);
-            delivered.publishAfterCommit();
-        }
-
     }
 
     public static DeliveryRepository repository(){
         DeliveryRepository deliveryRepository = RiderApplication.applicationContext.getBean(DeliveryRepository.class);
         return deliveryRepository;
+    }
+
+    public void pick(){
+        Picked picked = new Picked(this);
+        picked.publishAfterCommit();
+
+    }
+    public void deliveryConfirm(){
+        Delivered delivered = new Delivered(this);
+        delivered.publishAfterCommit();
+
     }
 
     // 요리 완료 - pick 가능
