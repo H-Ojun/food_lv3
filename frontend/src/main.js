@@ -51,6 +51,7 @@ pluralCaseList.push( {plural: "foodCookings", pascal: "FoodCooking"} )
 
 pluralCaseList.push( {plural: "deliveries", pascal: "Delivery"} )
 
+pluralCaseList.push( {plural: "orderStatuses", pascal: "OrderStatus"} )
 
 pluralCaseList.push( {plural: "searches", pascal: "Search"} )
 

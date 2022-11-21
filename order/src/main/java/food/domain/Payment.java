@@ -28,12 +28,6 @@ public class Payment  {
     
     
     private String orderId;
-    
-    
-    
-    
-    
-    private Boolean paid;
 
     @PostPersist
     public void onPostPersist(){
@@ -51,8 +45,6 @@ public class Payment  {
 
 
 
-    public void cancelPayment(CancelPaymentCommand cancelPaymentCommand){
-    }
 
     public static void pay(OrderPlaced orderPlaced){
 
@@ -73,6 +65,27 @@ public class Payment  {
 
             Paid paid = new Paid(payment);
             paid.publishAfterCommit();
+
+         });
+        */
+
+        
+    }
+    public static void cancelPayment(OrderCanceled orderCanceled){
+
+        /** Example 1:  new item 
+        Payment payment = new Payment();
+        repository().save(payment);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(orderCanceled.get???()).ifPresent(payment->{
+            
+            payment // do something
+            repository().save(payment);
+
 
          });
         */
