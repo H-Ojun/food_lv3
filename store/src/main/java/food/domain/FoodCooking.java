@@ -48,12 +48,18 @@ public class FoodCooking  {
         }
 
     }
+    
     public void start(){
+        // 요리 시작
+        setStatus("OrderStart");
         OrderStarted orderStarted = new OrderStarted(this);
         orderStarted.publishAfterCommit();
 
     }
+    
     public void finish(){
+        // 요리 종료
+        setStatus("OrderFinish");
         OrderFinished orderFinished = new OrderFinished(this);
         orderFinished.publishAfterCommit();
 

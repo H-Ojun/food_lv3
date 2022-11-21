@@ -13,33 +13,15 @@ import java.util.Date;
 @Data
 
 public class Delivery  {
-
-    
+ 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-    
     private Long id;
-    
-    
-    
-    
-    
+
     private String address;
-    
-    
-    
-    
-    
+
     private String status;
-    
-    
-    
-    
-    
+
     private String orderId;
 
     @PostPersist
@@ -85,13 +67,9 @@ public class Delivery  {
 
         
     }
+
+    // 주문 취소 (삭제)
     public static void updateStatus(OrderRejected orderRejected){
-
-        /** Example 1:  new item 
-        Delivery delivery = new Delivery();
-        repository().save(delivery);
-
-        */
 
         /** Example 2:  finding and process
         
@@ -106,25 +84,16 @@ public class Delivery  {
 
         
     }
+
+    // 주문 수락 pick 전 정보 추가
     public static void orderInfo(OrderAccepted orderAccepted){
 
-        /** Example 1:  new item 
         Delivery delivery = new Delivery();
+        delivery.setAddress(orderAccepted.getAddress());
+        delivery.setOrderId(orderAccepted.getOrderId());
+        delivery.setStatus(orderAccepted.getStatus());
+
         repository().save(delivery);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderAccepted.get???()).ifPresent(delivery->{
-            
-            delivery // do something
-            repository().save(delivery);
-
-
-         });
-        */
-
         
     }
 
