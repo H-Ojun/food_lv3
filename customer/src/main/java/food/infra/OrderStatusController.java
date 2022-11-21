@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 @RestController
-// @RequestMapping(value="/payments")
+// @RequestMapping(value="/orderStatuses")
 @Transactional
-public class PaymentController {
+public class OrderStatusController {
     @Autowired
-    PaymentRepository paymentRepository;
+    OrderStatusRepository orderStatusRepository;
+
+
+
 }

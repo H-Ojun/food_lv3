@@ -18,12 +18,10 @@ import food.domain.*;
 @Service
 @Transactional
 public class PolicyHandler{
+    @Autowired OrderStatusRepository orderStatusRepository;
     
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString){}
-
-    @Autowired
-    food.external.OrderListService orderListService;
 
     @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='Picked'")
     public void wheneverPicked_Notify(@Payload Picked picked){
@@ -31,14 +29,12 @@ public class PolicyHandler{
         Picked event = picked;
         System.out.println("\n\n##### listener Notify : " + picked + "\n\n");
 
-        // REST Request Sample
-        
-        // orderListService.getOrderList(/** mapping value needed */);
-
 
         
 
         // Sample Logic //
+        OrderStatus.notify(event);
+        
 
         
 
@@ -49,14 +45,12 @@ public class PolicyHandler{
         OrderAccepted event = orderAccepted;
         System.out.println("\n\n##### listener Notify : " + orderAccepted + "\n\n");
 
-        // REST Request Sample
-        
-        // orderListService.getOrderList(/** mapping value needed */);
-
 
         
 
         // Sample Logic //
+        OrderStatus.notify(event);
+        
 
         
 
@@ -67,14 +61,12 @@ public class PolicyHandler{
         OrderRejected event = orderRejected;
         System.out.println("\n\n##### listener Notify : " + orderRejected + "\n\n");
 
-        // REST Request Sample
-        
-        // orderListService.getOrderList(/** mapping value needed */);
-
 
         
 
         // Sample Logic //
+        OrderStatus.notify(event);
+        
 
         
 
@@ -85,14 +77,12 @@ public class PolicyHandler{
         OrderStarted event = orderStarted;
         System.out.println("\n\n##### listener Notify : " + orderStarted + "\n\n");
 
-        // REST Request Sample
-        
-        // orderListService.getOrderList(/** mapping value needed */);
-
 
         
 
         // Sample Logic //
+        OrderStatus.notify(event);
+        
 
         
 
@@ -103,14 +93,12 @@ public class PolicyHandler{
         OrderFinished event = orderFinished;
         System.out.println("\n\n##### listener Notify : " + orderFinished + "\n\n");
 
-        // REST Request Sample
-        
-        // orderListService.getOrderList(/** mapping value needed */);
-
 
         
 
         // Sample Logic //
+        OrderStatus.notify(event);
+        
 
         
 
@@ -121,14 +109,60 @@ public class PolicyHandler{
         Delivered event = delivered;
         System.out.println("\n\n##### listener Notify : " + delivered + "\n\n");
 
-        // REST Request Sample
+
         
-        // orderListService.getOrderList(/** mapping value needed */);
+
+        // Sample Logic //
+        OrderStatus.notify(event);
+        
+
+        
+
+    }
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='OrderCanceled'")
+    public void wheneverOrderCanceled_Notify(@Payload OrderCanceled orderCanceled){
+
+        OrderCanceled event = orderCanceled;
+        System.out.println("\n\n##### listener Notify : " + orderCanceled + "\n\n");
 
 
         
 
         // Sample Logic //
+        OrderStatus.notify(event);
+        
+
+        
+
+    }
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='OrderPlaced'")
+    public void wheneverOrderPlaced_Notify(@Payload OrderPlaced orderPlaced){
+
+        OrderPlaced event = orderPlaced;
+        System.out.println("\n\n##### listener Notify : " + orderPlaced + "\n\n");
+
+
+        
+
+        // Sample Logic //
+        OrderStatus.notify(event);
+        
+
+        
+
+    }
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='Paid'")
+    public void wheneverPaid_Notify(@Payload Paid paid){
+
+        Paid event = paid;
+        System.out.println("\n\n##### listener Notify : " + paid + "\n\n");
+
+
+        
+
+        // Sample Logic //
+        OrderStatus.notify(event);
+        
 
         
 

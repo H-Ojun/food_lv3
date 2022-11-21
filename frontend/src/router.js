@@ -16,6 +16,8 @@ import FoodCookingDetail from "./components/listers/FoodCookingDetail"
 import DeliveryManager from "./components/listers/DeliveryCards"
 import DeliveryDetail from "./components/listers/DeliveryDetail"
 
+import OrderStatusManager from "./components/listers/OrderStatusCards"
+import OrderStatusDetail from "./components/listers/OrderStatusDetail"
 
 import SearchView from "./components/SearchView"
 import SearchViewDetail from "./components/SearchViewDetail"
@@ -67,6 +69,16 @@ export default new Router({
                 component: DeliveryDetail
             },
 
+            {
+                path: '/orderStatuses',
+                name: 'OrderStatusManager',
+                component: OrderStatusManager
+            },
+            {
+                path: '/orderStatuses/:id',
+                name: 'OrderStatusDetail',
+                component: OrderStatusDetail
+            },
 
             {
                 path: '/searches',

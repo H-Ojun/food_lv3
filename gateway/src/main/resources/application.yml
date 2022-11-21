@@ -23,7 +23,7 @@ spring:
         - id: customer
           uri: http://localhost:8084
           predicates:
-            - Path=, /searches/**
+            - Path=/orderStatuses/**, /searches/**
         - id: frontend
           uri: http://localhost:8080
           predicates:
@@ -62,7 +62,7 @@ spring:
         - id: customer
           uri: http://customer:8080
           predicates:
-            - Path=, /searches/**
+            - Path=/orderStatuses/**, /searches/**
         - id: frontend
           uri: http://frontend:8080
           predicates:

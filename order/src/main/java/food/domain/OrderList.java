@@ -59,19 +59,13 @@ public class OrderList  {
     @PreRemove
     public void onPreRemove(){
 
-        //Following code causes dependency to external APIs
-        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-
-        food.external.CancelPaymentCommand cancelPaymentCommand = new food.external.CancelPaymentCommand();
-        cancelPaymentCommand.setPaid(false);
-        // mappings goes here
-        OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
-            .cancelPayment(getId(), cancelPaymentCommand);
-
-
-
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
+
+        // Get request from OrderStatus
+        //food.external.OrderStatus orderStatus =
+        //    Application.applicationContext.getBean(food.external.OrderStatusService.class)
+        //    .getOrderStatus(/** mapping value needed */);
 
     }
 
