@@ -11,6 +11,6 @@ import java.util.Date;
 @FeignClient(name = "order", url = "${api.url.order}")
 public interface PaymentService {
     @RequestMapping(method= RequestMethod.PUT, path="/payments/{id}/cancelpayment")
-    public void cancelPayment(@PathVariable("id") Long id);
+    public void cancelPayment(@PathVariable("id") Long id, @RequestBody CancelPaymentCommand cancelPaymentCommand );
 }
 

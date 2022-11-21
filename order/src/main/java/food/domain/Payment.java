@@ -45,7 +45,7 @@ public class Payment  {
 
 
 
-    public void cancelPayment(){
+    public void cancelPayment(CancelPaymentCommand cancelPaymentCommand){
     }
 
     public static void pay(OrderPlaced orderPlaced){
