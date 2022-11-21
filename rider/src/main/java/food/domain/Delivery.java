@@ -31,14 +31,28 @@ public class Delivery  {
         return deliveryRepository;
     }
 
+    // 배달 출발
     public void pick(){
-        Picked picked = new Picked(this);
-        picked.publishAfterCommit();
-
+        if ("OrderFinish".equals(status)) {
+            setStatus("Pick");
+            Picked picked = new Picked(this);
+            picked.publishAfterCommit();
+        } else {
+            // 요리 안됨
+            throw new RuntimeException("Unable to pick up : " + status);
+        }
     }
+
+    // 배달 완료
     public void deliveryConfirm(){
-        Delivered delivered = new Delivered(this);
-        delivered.publishAfterCommit();
+        if ("Pick".equals(status)) {
+            setStatus("Complete");
+            Delivered delivered = new Delivered(this);
+            delivered.publishAfterCommit();
+        } else {
+            // 배달 출발 안함
+            throw new RuntimeException("Unable to receive delivery. : " + status);
+        }
 
     }
 
