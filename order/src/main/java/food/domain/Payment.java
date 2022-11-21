@@ -45,28 +45,9 @@ public class Payment  {
 
 
 
-
-    public static void cancelPayment(OrderCanceled orderCanceled){
-
-        /** Example 1:  new item 
-        Payment payment = new Payment();
-        repository().save(payment);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderCanceled.get???()).ifPresent(payment->{
-            
-            payment // do something
-            repository().save(payment);
-
-
-         });
-        */
-
-        
+    public void cancelPayment(CancelPaymentCommand cancelPaymentCommand){
     }
+
     public static void pay(OrderPlaced orderPlaced){
 
         /** Example 1:  new item 
