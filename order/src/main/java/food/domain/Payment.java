@@ -52,6 +52,7 @@ public class Payment  {
 
 
     public void cancelPayment(CancelPaymentCommand cancelPaymentCommand){
+        setPaid(cancelPaymentCommand.getPaid());
     }
 
     public static void pay(OrderPlaced orderPlaced){
