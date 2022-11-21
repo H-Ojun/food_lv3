@@ -42,35 +42,25 @@ public class Payment  {
 
     }
 
+    // 주문자의 결제 취소
     public static void cancelPayment(OrderCanceled orderCanceled){
 
         repository().findByOrderId(orderCanceled.getId()).ifPresent(payment->{
-            // 결제 취소
+            
             repository().delete(payment);
 
          });
         
     }
+
+    // 요리사의 주문 취소
     public static void cancelPayment(OrderRejected orderRejected){
-
-        /** Example 1:  new item 
-        Payment payment = new Payment();
-        repository().save(payment);
-
-        */
-
-        /** Example 2:  finding and process
         
-        repository().findById(orderRejected.get???()).ifPresent(payment->{
+        repository().findByOrderId(Long.parseLong(orderRejected.getOrderId())).ifPresent(payment->{
             
-            payment // do something
-            repository().save(payment);
-
+            repository().delete(payment);
 
          });
-        */
-
-        
     }
 
 

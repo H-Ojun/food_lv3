@@ -27,14 +27,16 @@ public class Delivery  {
     @PostPersist
     public void onPostPersist(){
 
-
-        Picked picked = new Picked(this);
-        picked.publishAfterCommit();
-
-
-
-        Delivered delivered = new Delivered(this);
-        delivered.publishAfterCommit();
+        if ("OrderFinish".equals(status)) {
+            setStatus("Pick");
+            Picked picked = new Picked(this);
+            picked.publishAfterCommit();
+            repository().save(this);
+        } else if ("Pick".equals(status)) {
+            setStatus("Complete");
+            Delivered delivered = new Delivered(this);
+            delivered.publishAfterCommit();
+        }
 
     }
 
@@ -43,45 +45,26 @@ public class Delivery  {
         return deliveryRepository;
     }
 
-
-
-
+    // 요리 완료 - pick 가능
     public static void updateStatus(OrderFinished orderFinished){
 
-        /** Example 1:  new item 
-        Delivery delivery = new Delivery();
-        repository().save(delivery);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderFinished.get???()).ifPresent(delivery->{
+        repository().findByOrderId(orderFinished.getOrderId()).ifPresent(delivery->{
             
-            delivery // do something
+            delivery.setStatus(orderFinished.getStatus());
             repository().save(delivery);
 
-
          });
-        */
-
         
     }
 
     // 주문 취소 (삭제)
     public static void updateStatus(OrderRejected orderRejected){
 
-        /** Example 2:  finding and process
-        
-        repository().findById(orderRejected.get???()).ifPresent(delivery->{
+        repository().findByOrderId(orderRejected.getOrderId()).ifPresent(delivery->{
             
-            delivery // do something
-            repository().save(delivery);
-
+            repository().delete(delivery);
 
          });
-        */
-
         
     }
 
