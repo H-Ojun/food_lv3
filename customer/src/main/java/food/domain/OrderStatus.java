@@ -12,36 +12,18 @@ import java.util.Date;
 
 public class OrderStatus  {
 
-    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-    
     private Long id;
-    
-    
-    
-    
-    
+
     private String orderId;
     
-    
-    
-    
-    
     private String status;
-
 
     public static OrderStatusRepository repository(){
         OrderStatusRepository orderStatusRepository = CustomerApplication.applicationContext.getBean(OrderStatusRepository.class);
         return orderStatusRepository;
     }
-
-
-
 
     public static void notify(Picked picked){
 
@@ -64,6 +46,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(OrderAccepted orderAccepted){
 
         /** Example 1:  new item 
@@ -85,6 +68,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(OrderRejected orderRejected){
 
         /** Example 1:  new item 
@@ -106,6 +90,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(OrderStarted orderStarted){
 
         /** Example 1:  new item 
@@ -127,6 +112,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(OrderFinished orderFinished){
 
         /** Example 1:  new item 
@@ -148,6 +134,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(Delivered delivered){
 
         /** Example 1:  new item 
@@ -169,6 +156,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(OrderCanceled orderCanceled){
 
         /** Example 1:  new item 
@@ -190,6 +178,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(OrderPlaced orderPlaced){
 
         /** Example 1:  new item 
@@ -211,6 +200,7 @@ public class OrderStatus  {
 
         
     }
+
     public static void notify(Paid paid){
 
         /** Example 1:  new item 
@@ -232,6 +222,5 @@ public class OrderStatus  {
 
         
     }
-
 
 }

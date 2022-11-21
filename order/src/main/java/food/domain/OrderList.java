@@ -14,38 +14,16 @@ import java.util.Date;
 
 public class OrderList  {
 
-    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-    
     private Long id;
-    
-    
-    
-    
-    
+
     private String foodId;
-    
-    
-    
-    
-    
+
     private String address;
-    
-    
-    
-    
-    
+
     private String status;
-    
-    
-    
-    
-    
+
     private String customerId;
 
     @PostPersist
@@ -54,8 +32,8 @@ public class OrderList  {
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
-
     }
+
     @PreRemove
     public void onPreRemove(){
 
@@ -63,9 +41,9 @@ public class OrderList  {
         orderCanceled.publishAfterCommit();
 
         // Get request from OrderStatus
-        //food.external.OrderStatus orderStatus =
-        //    Application.applicationContext.getBean(food.external.OrderStatusService.class)
-        //    .getOrderStatus(/** mapping value needed */);
+        food.external.OrderStatus orderStatus =
+            OrderApplication.applicationContext.getBean(food.external.OrderStatusService.class)
+           .getOrderStatus(getId());
 
     }
 
