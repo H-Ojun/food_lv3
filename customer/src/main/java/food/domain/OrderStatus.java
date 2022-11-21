@@ -26,12 +26,6 @@ public class OrderStatus  {
     
     
     
-    private String orderId;
-    
-    
-    
-    
-    
     private String status;
 
 
