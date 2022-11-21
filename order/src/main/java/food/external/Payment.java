@@ -7,6 +7,7 @@ public class Payment {
 
     private Long id;
     private String orderId;
+    private Boolean paid;
 }
 
 
