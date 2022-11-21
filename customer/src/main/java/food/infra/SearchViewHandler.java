@@ -43,7 +43,7 @@ public class SearchViewHandler {
         try {
             if (!paid.validate()) return;
                 // view 객체 조회
-            Optional<Search> searchOptional = searchRepository.findById(paid.getOrderId());
+            Optional<Search> searchOptional = searchRepository.findById(Long.parseLong(paid.getOrderId()));
 
             if( searchOptional.isPresent()) {
                  Search search = searchOptional.get();
@@ -63,7 +63,7 @@ public class SearchViewHandler {
         try {
             if (!orderAccepted.validate()) return;
                 // view 객체 조회
-            Optional<Search> searchOptional = searchRepository.findById(orderAccepted.getOrderId());
+            Optional<Search> searchOptional = searchRepository.findById(Long.parseLong(orderAccepted.getOrderId()));
 
             if( searchOptional.isPresent()) {
                  Search search = searchOptional.get();

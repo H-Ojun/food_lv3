@@ -50,7 +50,7 @@ public class OrderList  {
 
     @PostPersist
     public void onPostPersist(){
-
+        this.status = "OrderPlace";
 
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
