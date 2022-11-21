@@ -12,29 +12,19 @@ import java.util.Date;
 @Data
 
 public class Payment  {
-
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-    
+
     private Long id;
-    
-    
-    
-    
-    
+
     private String orderId;
 
     @PostPersist
     public void onPostPersist(){
 
-
         Paid paid = new Paid(this);
-        paid.publishAfterCommit();
+        paid.publishAfterCommit();  // store status update
 
     }
 
@@ -45,48 +35,20 @@ public class Payment  {
 
     public static void pay(OrderPlaced orderPlaced){
 
-        /** Example 1:  new item 
+        // 결제
         Payment payment = new Payment();
+        payment.setOrderId(String.valueOf(orderPlaced.getId()));
         repository().save(payment);
 
-        Paid paid = new Paid(payment);
-        paid.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderPlaced.get???()).ifPresent(payment->{
-            
-            payment // do something
-            repository().save(payment);
-
-            Paid paid = new Paid(payment);
-            paid.publishAfterCommit();
-
-         });
-        */
-
-        
     }
+
     public static void cancelPayment(OrderCanceled orderCanceled){
 
-        /** Example 1:  new item 
-        Payment payment = new Payment();
-        repository().save(payment);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderCanceled.get???()).ifPresent(payment->{
-            
-            payment // do something
-            repository().save(payment);
-
+        repository().findByOrderId(orderCanceled.getId()).ifPresent(payment->{
+            // 결제 취소
+            repository().delete(payment);
 
          });
-        */
-
         
     }
 

@@ -37,13 +37,29 @@ public class OrderList  {
     @PreRemove
     public void onPreRemove(){
 
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
-
+        String msg;
         // Get request from OrderStatus
         food.external.OrderStatus orderStatus =
             OrderApplication.applicationContext.getBean(food.external.OrderStatusService.class)
-           .getOrderStatus(getId());
+           .getOrderStatus(getId());    // OrderStatus의 id가 OrderId라서 getId()를 보내 객체를 가져옴
+
+        if (orderStatus != null) {
+            if ("OrderPlace".equals(orderStatus.getStatus())
+            || "Paid".equals(orderStatus.getStatus())
+            || "OrderAccept".equals(orderStatus.getStatus())) {
+                // 정상 주문 취소
+                OrderCanceled orderCanceled = new OrderCanceled(this);
+                orderCanceled.publishAfterCommit();
+                return;
+            } else {
+                // 이미 요리 시작 이후의 상태
+                msg = "Order Status : " + orderStatus.getStatus();
+            }
+        } else {
+            msg = "Not Found OrderId : " + getId();
+        }
+
+        throw new RuntimeException(msg);
 
     }
 
@@ -51,13 +67,5 @@ public class OrderList  {
         OrderListRepository orderListRepository = OrderApplication.applicationContext.getBean(OrderListRepository.class);
         return orderListRepository;
     }
-
-    public void search(){
-        //
-    }
-
-
-
-
 
 }

@@ -1,5 +1,6 @@
 server:
   port: 8080
+# Circuit Breaker
 feign:
   hystrix:
     enabled: true

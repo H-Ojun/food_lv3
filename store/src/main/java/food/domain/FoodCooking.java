@@ -41,15 +41,15 @@ public class FoodCooking  {
     public void accept(AcceptCommand acceptCommand){
 
         if (acceptCommand.getAccept()) {
+            // 수락
+            setStatus("OrderAccept");
             OrderAccepted orderAccepted = new OrderAccepted(this);
             orderAccepted.publishAfterCommit();
-
-            setStatus("OrderAccept");
         } else {
+            // 거절
+            setStatus("OrderReject");
             OrderRejected orderRejected = new OrderRejected(this);
             orderRejected.publishAfterCommit();
-
-            setStatus("OrderReject");
         }
 
     }
@@ -59,6 +59,7 @@ public class FoodCooking  {
 
     }
 
+    // 결제 완료
     public static void updateStatus(Paid paid){
 
         repository().findByOrderId(paid.getOrderId()).ifPresent(foodCooking->{
@@ -70,28 +71,16 @@ public class FoodCooking  {
         
     }
 
+    // 주문 취소(확정)
     public static void updateStatus(OrderCanceled orderCanceled){
-
-        /** Example 1:  new item 
-        FoodCooking foodCooking = new FoodCooking();
-        repository().save(foodCooking);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderCanceled.get???()).ifPresent(foodCooking->{
+        repository().findByOrderId(String.valueOf(orderCanceled.getId())).ifPresent(foodCooking->{
             
-            foodCooking // do something
-            repository().save(foodCooking);
-
+            repository().delete(foodCooking);
 
          });
-        */
-
-        
     }
 
+    // 최초 주문 정보 확인
     public static void orderInfo(OrderPlaced orderPlaced){
         
         FoodCooking foodCooking = new FoodCooking();
