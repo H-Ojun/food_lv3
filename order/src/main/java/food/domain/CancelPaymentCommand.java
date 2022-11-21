@@ -9,6 +9,7 @@ import lombok.Data;
 public class CancelPaymentCommand {
 
         private String orderId;
+        private Boolean paid;
 
 
 }

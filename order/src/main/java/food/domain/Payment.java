@@ -28,6 +28,12 @@ public class Payment  {
     
     
     private String orderId;
+    
+    
+    
+    
+    
+    private Boolean paid;
 
     @PostPersist
     public void onPostPersist(){

@@ -36,7 +36,7 @@ mvn spring-boot:run
 - order
 ```
  http :8088/orderLists id="id" foodId="foodId" address="address" status="status" customerId="customerId" 
- http :8088/payments id="id" orderId="orderId" 
+ http :8088/payments id="id" orderId="orderId" paid="paid" 
 ```
 - store
 ```
