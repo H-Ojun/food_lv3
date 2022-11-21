@@ -48,7 +48,7 @@ mvn spring-boot:run
 ```
 - customer
 ```
- http :8088/orderStatuses id="id" orderId="orderId" status="status" 
+ http :8088/orderStatuses id="id" status="status" 
 ```
 
 

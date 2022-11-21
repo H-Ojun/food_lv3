@@ -6,7 +6,6 @@ import java.util.Date;
 public class OrderStatus {
 
     private Long id;
-    private String orderId;
     private String status;
 }
 

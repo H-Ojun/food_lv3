@@ -67,7 +67,6 @@
             headers: 
                 [
                     { text: "id", value: "id" },
-                    { text: "orderId", value: "orderId" },
                     { text: "status", value: "status" },
                 ],
             orderStatus : [],
@@ -86,7 +85,6 @@
             this.values = temp.data._embedded.orderstatuses;
 
             this.newValue = {
-                'orderId': '',
                 'status': '',
             }
         },

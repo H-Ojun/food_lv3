@@ -15,8 +15,6 @@ public class OrderStatus  {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-
-    private String orderId;
     
     private String status;
 
