@@ -1,6 +1,7 @@
 package food.domain;
 
 import food.domain.OrderPlaced;
+import food.domain.OrderCanceled;
 import food.OrderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -35,61 +36,55 @@ public class OrderList  {
 
     @PreRemove
     public void onPreRemove(){
-        // String msg;
-        // // Get request from OrderStatus
-        // food.external.OrderStatus orderStatus =
-        //     OrderApplication.applicationContext.getBean(food.external.OrderStatusService.class)
-        //    .getOrderStatus(getId());    // OrderStatus의 id가 OrderId라서 getId()를 보내 객체를 가져옴
+        String msg;
 
-        // if (orderStatus != null) {
-        //     if ("OrderPlace".equals(orderStatus.getStatus())
-        //     || "Paid".equals(orderStatus.getStatus())
-        //     || "OrderAccept".equals(orderStatus.getStatus())) {
-        //         // 정상 주문 취소
-        //         OrderCanceled orderCanceled = new OrderCanceled(this);
-        //         orderCanceled.publishAfterCommit();
-        //         return;
-        //     } else {
-        //         // 이미 요리 시작 이후의 상태
-        //         msg = "Order Status : " + orderStatus.getStatus();
-        //     }
-        // } else {
-        //     msg = "Not Found OrderId : " + getId();
-        // }
+        if (status != null) {
+            if ("OrderPlace".equals(status)
+            || "Paid".equals(status)
+            || "OrderAccept".equals(status)) {
+                // 정상 주문 취소
+                //Following code causes dependency to external APIs
+                // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+                food.external.CancelPaymentCommand cancelPaymentCommand = new food.external.CancelPaymentCommand();
+                cancelPaymentCommand.setCancel(true);
+                // mappings goes here
+                OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
+                    .cancelPayment(getId(), cancelPaymentCommand);
 
-        // throw new RuntimeException(msg);
+                OrderCanceled orderCanceled = new OrderCanceled(this);
+                orderCanceled.publishAfterCommit();
+                return;
+            } else {
+                // 이미 요리 시작 이후의 상태
+                msg = "Order Status : " + status;
+            }
+        } else {
+            msg = "Not Found OrderId : " + getId();
+        }
+
+        throw new RuntimeException(msg);
     }
 
     public static OrderListRepository repository(){
         OrderListRepository orderListRepository = OrderApplication.applicationContext.getBean(OrderListRepository.class);
         return orderListRepository;
     }
-    
-    public void cancel(){
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
 
+    public void search(){
+        //
     }
+
+
 
     public static void updateStatus(OrderSync orderSync){
 
-        /** Example 1:  new item 
-        OrderList orderList = new OrderList();
-        repository().save(orderList);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderSync.get???()).ifPresent(orderList->{
+        repository().findById(orderSync.getId()).ifPresent(orderList->{
             
-            orderList // do something
+            orderList.setStatus(orderSync.getStatus());
             repository().save(orderList);
 
 
          });
-        */
-
         
     }
 
