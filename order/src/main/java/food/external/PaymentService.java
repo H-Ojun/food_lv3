@@ -17,4 +17,6 @@ public interface PaymentService {
         @PathVariable("id") Long id,
         @RequestBody CancelPaymentCommand cancelPaymentCommand
     );
+
+    public Payment getPayment(Long id);
 }

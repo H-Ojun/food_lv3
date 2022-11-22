@@ -38,37 +38,32 @@ public class OrderList  {
     public void onPreRemove(){
 
         // Get request from Payment
-        //food.external.Payment payment =
-        //    Application.applicationContext.getBean(food.external.PaymentService.class)
-        //    .getPayment(/** mapping value needed */);
-        
-        String msg;
+        food.external.Payment payment =
+           OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
+           .getPayment(getId());
 
-        if (status != null) {
-            if ("OrderPlace".equals(status)
-            || "Paid".equals(status)
-            || "OrderAccept".equals(status)) {
-                // 정상 주문 취소
-                //Following code causes dependency to external APIs
-                // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-                food.external.CancelPaymentCommand cancelPaymentCommand = new food.external.CancelPaymentCommand();
-                cancelPaymentCommand.setCancel(true);
-                // mappings goes here
-                OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
-                    .cancelPayment(getId(), cancelPaymentCommand);
-
-                OrderCanceled orderCanceled = new OrderCanceled(this);
-                orderCanceled.publishAfterCommit();
-                return;
-            } else {
-                // 이미 요리 시작 이후의 상태
-                msg = "Order Status : " + status;
-            }
-        } else {
-            msg = "Not Found OrderId : " + getId();
+        if (!payment.getCancel() || "OrderPlace".equals(status)) {
+            // 결제 안됨
+            throw new RuntimeException("It's before the payment");
         }
 
-        throw new RuntimeException(msg);
+        if ("Paid".equals(status)
+        || "OrderAccept".equals(status)) {
+            // 정상 주문 취소
+            //Following code causes dependency to external APIs
+            // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+            food.external.CancelPaymentCommand cancelPaymentCommand = new food.external.CancelPaymentCommand();
+            cancelPaymentCommand.setCancel(true);
+            // mappings goes here
+            OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
+                .cancelPayment(getId(), cancelPaymentCommand);
+
+            OrderCanceled orderCanceled = new OrderCanceled(this);
+            orderCanceled.publishAfterCommit();
+        } else {
+            // 이미 요리 시작 이후의 상태
+            throw new RuntimeException("Order Status : " + status);
+        }
     }
 
     public static OrderListRepository repository(){
