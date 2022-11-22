@@ -57,5 +57,15 @@ public class PayInfoViewHandler {
         }
     }
 
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenOrderRejected_then_DELETE_1(@Payload OrderRejected orderRejected) {
+        try {
+            if (!orderRejected.validate()) return;
+            // view 레파지 토리에 삭제 쿼리
+            payInfoRepository.deleteByOrderId(orderRejected.getOrderId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 
