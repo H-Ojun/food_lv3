@@ -12,4 +12,10 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = new Payment();
         return payment;
     }
+
+    @Override
+    public void cancelPayment(Long id, CancelPaymentCommand cancelPaymentCommand) {
+        // TODO Auto-generated method stub
+        
+    }
 }
