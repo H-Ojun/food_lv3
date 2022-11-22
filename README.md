@@ -85,8 +85,19 @@ OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 �
 # Circuit Breaker
 결제 취소시 결제가 되었는지 확인할때, Reqeust/Response를 하며 설정하였다.
 
+<img width="518" alt="Screen Shot 2022-11-22 at 4 23 26 PM" src="https://user-images.githubusercontent.com/52265076/203250697-5689db14-3a00-4636-b7b5-92ba49dd4005.png">
+
+서킷 브레이커를 강제로 확인하기 위해 쓰레드 슬립을 랜덤값으로 설정하였다.
+<img width="595" alt="Screen Shot 2022-11-22 at 4 26 11 PM" src="https://user-images.githubusercontent.com/52265076/203251284-738a0261-b293-4b4d-a7dd-08ca3cfa378c.png">
+
+
 <img width="500" alt="Screen Shot 2022-11-22 at 3 21 19 PM" src="https://user-images.githubusercontent.com/52265076/203239888-4964c1d3-fcb9-4404-97ad-78767855ad54.png">
-<img width="455" alt="Screen Shot 2022-11-22 at 3 21 47 PM" src="https://user-images.githubusercontent.com/52265076/203239900-1a3c5f6b-c9c4-4e51-a5e2-979f41187537.png">
+
+Circuit Breakder 가 발동되면 fallback 에서 throw를 내놓도록 설정하였다.
+
+<img width="534" alt="Screen Shot 2022-11-22 at 4 15 21 PM" src="https://user-images.githubusercontent.com/52265076/203249265-e7cacb84-d59d-40c3-a30b-bda55b052b51.png">
+
+
 
 
 # Gateway / Ingress
