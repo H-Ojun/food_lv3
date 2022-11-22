@@ -95,6 +95,7 @@ OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 �
 
 # 추가사항 1 (결제 내역과 상태를 확인할 수 있다)
 결제, 결제취소시 내역을 확인할 수 있다.
+
 <img width="506" alt="Screen Shot 2022-11-22 at 3 58 24 PM" src="https://user-images.githubusercontent.com/52265076/203246225-c712d4f8-d9c4-4bfb-b7f3-a13c45082923.png">
 
 <img width="467" alt="Screen Shot 2022-11-22 at 3 10 32 PM" src="https://user-images.githubusercontent.com/52265076/203238234-5c5d9052-5591-4b0e-a179-f44c269b1517.png">
@@ -104,6 +105,7 @@ OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 �
 
 # 추가사항 2 (pick이 있는지 여부와 deliveryconfirm이 되었는지 확인할 수 있다)
 pick이 되면 확인할 수 있다.
+
 <img width="325" alt="Screen Shot 2022-11-22 at 3 57 18 PM" src="https://user-images.githubusercontent.com/52265076/203245995-bfa59130-8a9a-4647-9329-82b4362b1ea9.png">
 
 <img width="464" alt="Screen Shot 2022-11-22 at 3 09 55 PM" src="https://user-images.githubusercontent.com/52265076/203238160-62371fec-3787-4f70-b1c0-54d58fa869e9.png">
