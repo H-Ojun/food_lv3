@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "order", url = "${api.url.order}")
+@FeignClient(
+    name = "order",
+    url = "${api.url.order}",
+    fallback = PaymentServiceImpl.class
+)
 public interface PaymentService {
     @RequestMapping(
         method = RequestMethod.PUT,

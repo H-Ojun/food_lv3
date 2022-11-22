@@ -45,7 +45,7 @@ public class OnDeliveryInfoViewHandler {
             if (!delivered.validate()) return;
                 // view 객체 조회
 
-                List<OnDeliveryInfo> onDeliveryInfoList = onDeliveryInfoRepository.findByOrderId(String.valueOf(delivered.getId()));
+                List<OnDeliveryInfo> onDeliveryInfoList = onDeliveryInfoRepository.findByOrderId(delivered.getOrderId());
                 for(OnDeliveryInfo onDeliveryInfo : onDeliveryInfoList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     onDeliveryInfo.setStatus(delivered.getStatus());
