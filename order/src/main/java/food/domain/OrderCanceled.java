@@ -14,10 +14,11 @@ public class OrderCanceled extends AbstractEvent {
     private String address;
     private String status;
 
-    public OrderCanceled(OrderList aggregate){
+    public OrderCanceled(OrderList aggregate) {
         super(aggregate);
     }
-    public OrderCanceled(){
+
+    public OrderCanceled() {
         super();
     }
 }

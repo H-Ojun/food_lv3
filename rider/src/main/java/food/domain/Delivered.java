@@ -14,10 +14,11 @@ public class Delivered extends AbstractEvent {
     private String status;
     private String orderId;
 
-    public Delivered(Delivery aggregate){
+    public Delivered(Delivery aggregate) {
         super(aggregate);
     }
-    public Delivered(){
+
+    public Delivered() {
         super();
     }
 }

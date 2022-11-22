@@ -14,10 +14,11 @@ public class Picked extends AbstractEvent {
     private String status;
     private String orderId;
 
-    public Picked(Delivery aggregate){
+    public Picked(Delivery aggregate) {
         super(aggregate);
     }
-    public Picked(){
+
+    public Picked() {
         super();
     }
 }

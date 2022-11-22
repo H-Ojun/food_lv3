@@ -10,12 +10,16 @@ import OrderListDetail from "./components/listers/OrderListDetail"
 import PaymentManager from "./components/listers/PaymentCards"
 import PaymentDetail from "./components/listers/PaymentDetail"
 
+import PayInfoView from "./components/PayInfoView"
+import PayInfoViewDetail from "./components/PayInfoViewDetail"
 import FoodCookingManager from "./components/listers/FoodCookingCards"
 import FoodCookingDetail from "./components/listers/FoodCookingDetail"
 
 import DeliveryManager from "./components/listers/DeliveryCards"
 import DeliveryDetail from "./components/listers/DeliveryDetail"
 
+import OnDeliveryInfoView from "./components/OnDeliveryInfoView"
+import OnDeliveryInfoViewDetail from "./components/OnDeliveryInfoViewDetail"
 import OrderStatusManager from "./components/listers/OrderStatusCards"
 import OrderStatusDetail from "./components/listers/OrderStatusDetail"
 
@@ -48,6 +52,16 @@ export default new Router({
             },
 
             {
+                path: '/payInfos',
+                name: 'PayInfoView',
+                component: PayInfoView
+            },
+            {
+                path: '/payInfos/:id',
+                name: 'PayInfoViewDetail',
+                component: PayInfoViewDetail
+            },
+            {
                 path: '/foodCookings',
                 name: 'FoodCookingManager',
                 component: FoodCookingManager
@@ -69,6 +83,16 @@ export default new Router({
                 component: DeliveryDetail
             },
 
+            {
+                path: '/onDeliveryInfos',
+                name: 'OnDeliveryInfoView',
+                component: OnDeliveryInfoView
+            },
+            {
+                path: '/onDeliveryInfos/:id',
+                name: 'OnDeliveryInfoViewDetail',
+                component: OnDeliveryInfoViewDetail
+            },
             {
                 path: '/orderStatuses',
                 name: 'OrderStatusManager',

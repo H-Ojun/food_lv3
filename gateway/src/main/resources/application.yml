@@ -11,7 +11,7 @@ spring:
         - id: order
           uri: http://localhost:8081
           predicates:
-            - Path=/orderLists/**, /payments/**, 
+            - Path=/orderLists/**, /payments/**, /payInfos/**
         - id: store
           uri: http://localhost:8082
           predicates:
@@ -19,7 +19,7 @@ spring:
         - id: rider
           uri: http://localhost:8083
           predicates:
-            - Path=/deliveries/**, 
+            - Path=/deliveries/**, /onDeliveryInfos/**
         - id: customer
           uri: http://localhost:8084
           predicates:
@@ -50,7 +50,7 @@ spring:
         - id: order
           uri: http://order:8080
           predicates:
-            - Path=/orderLists/**, /payments/**, 
+            - Path=/orderLists/**, /payments/**, /payInfos/**
         - id: store
           uri: http://store:8080
           predicates:
@@ -58,7 +58,7 @@ spring:
         - id: rider
           uri: http://rider:8080
           predicates:
-            - Path=/deliveries/**, 
+            - Path=/deliveries/**, /onDeliveryInfos/**
         - id: customer
           uri: http://customer:8080
           predicates:
