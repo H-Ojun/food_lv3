@@ -57,11 +57,6 @@ public class OrderList  {
     }
     @PreRemove
     public void onPreRemove(){
-        // Get request from OrderStatus
-        //food.external.OrderStatus orderStatus =
-        //    Application.applicationContext.getBean(food.external.OrderStatusService.class)
-        //    .getOrderStatus(/** mapping value needed */);
-
     }
 
     public static OrderListRepository repository(){
@@ -78,8 +73,37 @@ public class OrderList  {
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
 
+        //Following code causes dependency to external APIs
+        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+
+        food.external.Payment payment = new food.external.Payment();
+        // mappings goes here
+        OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
+            .cancelPayment(payment);
+
     }
 
+    public static void updateStatus(OrderSync orderSync){
+
+        /** Example 1:  new item 
+        OrderList orderList = new OrderList();
+        repository().save(orderList);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(orderSync.get???()).ifPresent(orderList->{
+            
+            orderList // do something
+            repository().save(orderList);
+
+
+         });
+        */
+
+        
+    }
 
 
 }

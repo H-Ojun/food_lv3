@@ -1,5 +1,6 @@
 package food.domain;
 
+import food.domain.OrderSync;
 import food.CustomerApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +29,14 @@ public class OrderStatus  {
     
     private String status;
 
+    @PostPersist
+    public void onPostPersist(){
+
+
+        OrderSync orderSync = new OrderSync(this);
+        orderSync.publishAfterCommit();
+
+    }
 
     public static OrderStatusRepository repository(){
         OrderStatusRepository orderStatusRepository = CustomerApplication.applicationContext.getBean(OrderStatusRepository.class);

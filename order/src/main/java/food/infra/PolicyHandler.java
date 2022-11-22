@@ -41,33 +41,34 @@ public class PolicyHandler{
 
     }
 
-    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='OrderCanceled'")
-    public void wheneverOrderCanceled_CancelPayment(@Payload OrderCanceled orderCanceled){
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='OrderRejected'")
+    public void wheneverOrderRejected_RejectPayment(@Payload OrderRejected orderRejected){
 
-        OrderCanceled event = orderCanceled;
-        System.out.println("\n\n##### listener CancelPayment : " + orderCanceled + "\n\n");
+        OrderRejected event = orderRejected;
+        System.out.println("\n\n##### listener RejectPayment : " + orderRejected + "\n\n");
 
 
         
 
         // Sample Logic //
-        Payment.cancelPayment(event);
+        Payment.rejectPayment(event);
         
 
         
 
     }
-    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='OrderRejected'")
-    public void wheneverOrderRejected_CancelPayment(@Payload OrderRejected orderRejected){
 
-        OrderRejected event = orderRejected;
-        System.out.println("\n\n##### listener CancelPayment : " + orderRejected + "\n\n");
+    @StreamListener(value=KafkaProcessor.INPUT, condition="headers['type']=='OrderSync'")
+    public void wheneverOrderSync_UpdateStatus(@Payload OrderSync orderSync){
+
+        OrderSync event = orderSync;
+        System.out.println("\n\n##### listener UpdateStatus : " + orderSync + "\n\n");
 
 
         
 
         // Sample Logic //
-        Payment.cancelPayment(event);
+        OrderList.updateStatus(event);
         
 
         

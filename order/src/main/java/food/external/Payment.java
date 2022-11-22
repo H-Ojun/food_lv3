@@ -3,10 +3,11 @@ package food.external;
 import lombok.Data;
 import java.util.Date;
 @Data
-public class OrderStatus {
+public class Payment {
 
     private Long id;
-    private String status;
+    private String orderId;
+    private Boolean cancel;
 }
 
 
