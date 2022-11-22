@@ -9,8 +9,7 @@ public class PaymentServiceImpl implements PaymentService {
      * Fallback
      */
     public Payment getPayment(Long id) {
-        Payment payment = new Payment();
-        return payment;
+        throw new RuntimeException("TIMEOUT_ERROR");
     }
 
     @Override
