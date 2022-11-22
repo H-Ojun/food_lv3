@@ -49,7 +49,7 @@ logging:
 
 api:
   url:
-    customer: customer:8084
+    customer: localhost:8084
 
 
 server:
