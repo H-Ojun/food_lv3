@@ -1,7 +1,6 @@
 package food.domain;
 
 import food.domain.OrderPlaced;
-import food.domain.OrderCanceled;
 import food.OrderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -36,7 +35,6 @@ public class OrderList  {
 
     @PreRemove
     public void onPreRemove(){
-
         String msg;
         // Get request from OrderStatus
         food.external.OrderStatus orderStatus =
@@ -66,6 +64,12 @@ public class OrderList  {
     public static OrderListRepository repository(){
         OrderListRepository orderListRepository = OrderApplication.applicationContext.getBean(OrderListRepository.class);
         return orderListRepository;
+    }
+    
+    public void cancel(){
+        OrderCanceled orderCanceled = new OrderCanceled(this);
+        orderCanceled.publishAfterCommit();
+
     }
 
 }

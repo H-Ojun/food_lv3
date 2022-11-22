@@ -21,5 +21,23 @@ public class OrderListController {
 
 
 
+    @RequestMapping(value = "orderLists/{id}/cancel",
+        method = RequestMethod.PUT,
+        produces = "application/json;charset=UTF-8")
+    public OrderList cancel(@PathVariable(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+            System.out.println("##### /orderList/cancel  called #####");
+            Optional<OrderList> optionalOrderList = orderListRepository.findById(id);
+            
+            optionalOrderList.orElseThrow(()-> new Exception("No Entity Found"));
+            OrderList orderList = optionalOrderList.get();
+            orderList.cancel();
+            
+            orderListRepository.save(orderList);
+            return orderList;
+            
+    }
+    
+
+
 
 }
