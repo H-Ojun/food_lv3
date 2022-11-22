@@ -42,12 +42,17 @@ public class OrderList  {
            OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
            .getPayment(getId());
 
-        if (!payment.getCancel() || "OrderPlace".equals(status)) {
-            // 결제 안됨
+        if (payment == null) {
             throw new RuntimeException("It's before the payment");
         }
 
-        if ("Paid".equals(status)
+        if (payment.getCancel()) {
+            // 이미 취소된 주문
+            throw new RuntimeException("It's the payment");
+        }
+
+        if ("OrderPlace".equals(status)
+        || "Paid".equals(status)
         || "OrderAccept".equals(status)) {
             // 정상 주문 취소
             //Following code causes dependency to external APIs

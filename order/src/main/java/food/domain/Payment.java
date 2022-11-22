@@ -60,7 +60,7 @@ public class Payment  {
     // 요리사의 주문 취소
     public static void rejectPayment(OrderRejected orderRejected){
         
-        repository().findByOrderId(Long.parseLong(orderRejected.getOrderId())).ifPresent(payment->{
+        repository().findByOrderId(orderRejected.getOrderId()).ifPresent(payment->{
             
             repository().delete(payment);
 

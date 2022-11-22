@@ -25,7 +25,7 @@ public class PaymentController {
         produces = "application/json;charset=UTF-8")
     public Payment cancelPayment(@PathVariable(value = "id") Long id, @RequestBody CancelPaymentCommand cancelPaymentCommand, HttpServletRequest request, HttpServletResponse response) throws Exception {
             System.out.println("##### /payment/cancelPayment  called #####");
-            Optional<Payment> optionalPayment = paymentRepository.findByOrderId(id);
+            Optional<Payment> optionalPayment = paymentRepository.findByOrderId(String.valueOf(id));
             
             optionalPayment.orElseThrow(()-> new Exception("No Entity Found"));
             Payment payment = optionalPayment.get();
@@ -36,4 +36,18 @@ public class PaymentController {
             
     }
 
+    @RequestMapping(value = "payments/{id}",
+        method = RequestMethod.GET,
+        produces = "application/json;charset=UTF-8")
+    public Payment getPayment(@PathVariable(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("##### /payment  called #####");
+        Optional<Payment> optionalPayment = paymentRepository.findByOrderId(String.valueOf(id));
+        
+        optionalPayment.orElseThrow(()-> {
+            return null;
+        });
+        Payment payment = optionalPayment.get();
+        return payment;
+        
+}
 }

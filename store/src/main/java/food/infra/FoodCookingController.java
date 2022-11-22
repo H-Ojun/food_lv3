@@ -25,7 +25,7 @@ public class FoodCookingController {
         produces = "application/json;charset=UTF-8")
     public FoodCooking accept(@PathVariable(value = "id") Long id, @RequestBody AcceptCommand acceptCommand, HttpServletRequest request, HttpServletResponse response) throws Exception {
             System.out.println("##### /foodCooking/accept  called #####");
-            Optional<FoodCooking> optionalFoodCooking = foodCookingRepository.findById(id);
+            Optional<FoodCooking> optionalFoodCooking = foodCookingRepository.findByOrderId(String.valueOf(id));
             
             optionalFoodCooking.orElseThrow(()-> new Exception("No Entity Found"));
             FoodCooking foodCooking = optionalFoodCooking.get();
@@ -44,7 +44,7 @@ public class FoodCookingController {
         produces = "application/json;charset=UTF-8")
     public FoodCooking start(@PathVariable(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
             System.out.println("##### /foodCooking/start  called #####");
-            Optional<FoodCooking> optionalFoodCooking = foodCookingRepository.findById(id);
+            Optional<FoodCooking> optionalFoodCooking = foodCookingRepository.findByOrderId(String.valueOf(id));
             
             optionalFoodCooking.orElseThrow(()-> new Exception("No Entity Found"));
             FoodCooking foodCooking = optionalFoodCooking.get();
@@ -63,7 +63,7 @@ public class FoodCookingController {
         produces = "application/json;charset=UTF-8")
     public FoodCooking finish(@PathVariable(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
             System.out.println("##### /foodCooking/finish  called #####");
-            Optional<FoodCooking> optionalFoodCooking = foodCookingRepository.findById(id);
+            Optional<FoodCooking> optionalFoodCooking = foodCookingRepository.findByOrderId(String.valueOf(id));
             
             optionalFoodCooking.orElseThrow(()-> new Exception("No Entity Found"));
             FoodCooking foodCooking = optionalFoodCooking.get();

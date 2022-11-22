@@ -18,5 +18,11 @@ public interface PaymentService {
         @RequestBody CancelPaymentCommand cancelPaymentCommand
     );
 
-    public Payment getPayment(Long id);
+    @RequestMapping(
+        method = RequestMethod.GET,
+        path = "/payments/{id}"
+    )
+    public Payment getPayment(
+        @PathVariable("id") Long id
+    );
 }
