@@ -1,7 +1,6 @@
 package food.domain;
 
 import food.domain.OrderPlaced;
-import food.domain.OrderCanceled;
 import food.OrderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -58,11 +57,6 @@ public class OrderList  {
     }
     @PreRemove
     public void onPreRemove(){
-
-
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
-
         // Get request from OrderStatus
         //food.external.OrderStatus orderStatus =
         //    Application.applicationContext.getBean(food.external.OrderStatusService.class)
@@ -80,6 +74,11 @@ public class OrderList  {
     }
 
 
+    public void cancel(){
+        OrderCanceled orderCanceled = new OrderCanceled(this);
+        orderCanceled.publishAfterCommit();
+
+    }
 
 
 
