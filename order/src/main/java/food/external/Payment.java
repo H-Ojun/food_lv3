@@ -1,7 +1,8 @@
 package food.external;
 
-import lombok.Data;
 import java.util.Date;
+import lombok.Data;
+
 @Data
 public class Payment {
 
@@ -9,5 +10,3 @@ public class Payment {
     private String orderId;
     private Boolean cancel;
 }
-
-

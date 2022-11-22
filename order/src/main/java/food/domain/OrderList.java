@@ -36,6 +36,12 @@ public class OrderList  {
 
     @PreRemove
     public void onPreRemove(){
+
+        // Get request from Payment
+        //food.external.Payment payment =
+        //    Application.applicationContext.getBean(food.external.PaymentService.class)
+        //    .getPayment(/** mapping value needed */);
+        
         String msg;
 
         if (status != null) {
