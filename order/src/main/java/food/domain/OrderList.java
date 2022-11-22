@@ -1,6 +1,7 @@
 package food.domain;
 
 import food.domain.OrderPlaced;
+import food.domain.OrderCanceled;
 import food.OrderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -57,6 +58,20 @@ public class OrderList  {
     }
     @PreRemove
     public void onPreRemove(){
+
+        //Following code causes dependency to external APIs
+        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+
+        food.external.CancelPaymentCommand cancelPaymentCommand = new food.external.CancelPaymentCommand();
+        // mappings goes here
+        OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
+            .cancelPayment(/* get???(), */ cancelPaymentCommand);
+
+
+
+        OrderCanceled orderCanceled = new OrderCanceled(this);
+        orderCanceled.publishAfterCommit();
+
     }
 
     public static OrderListRepository repository(){
@@ -69,19 +84,6 @@ public class OrderList  {
     }
 
 
-    public void cancel(){
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
-
-        //Following code causes dependency to external APIs
-        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
-
-        food.external.Payment payment = new food.external.Payment();
-        // mappings goes here
-        OrderApplication.applicationContext.getBean(food.external.PaymentService.class)
-            .cancelPayment(payment);
-
-    }
 
     public static void updateStatus(OrderSync orderSync){
 
