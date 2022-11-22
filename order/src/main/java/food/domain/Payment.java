@@ -52,6 +52,7 @@ public class Payment  {
         // 결제
         Payment payment = new Payment();
         payment.setOrderId(String.valueOf(orderPlaced.getId()));
+        payment.setCancel(false);
         repository().save(payment);
 
     }
