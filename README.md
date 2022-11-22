@@ -84,6 +84,7 @@ OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 �
 
 # Circuit Breaker
 결제 취소시 결제가 되었는지 확인할때, Reqeust/Response를 하며 설정하였다.
+
 <img width="500" alt="Screen Shot 2022-11-22 at 3 21 19 PM" src="https://user-images.githubusercontent.com/52265076/203239888-4964c1d3-fcb9-4404-97ad-78767855ad54.png">
 <img width="455" alt="Screen Shot 2022-11-22 at 3 21 47 PM" src="https://user-images.githubusercontent.com/52265076/203239900-1a3c5f6b-c9c4-4e51-a5e2-979f41187537.png">
 
