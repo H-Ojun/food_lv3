@@ -19,7 +19,9 @@
 9. 고객이 주문상태를 중간중간 조회한다.
 10. 주문상태가 바뀔 때 마다 카톡으로 알림을 보낸다.
 11. 고객이 요리를 배달 받으면 배송확인 버튼을 탭하여, 모든 거래가 완료된다.
+
 추가사항 1 (결제 내역과 상태를 확인할 수 있다)
+
 추가사항 2 (pick이 있는지 여부와 deliveryconfirm이 되었는지 확인할 수 있다)
 
 <img width="1129" alt="Screen Shot 2022-11-22 at 2 53 15 PM" src="https://user-images.githubusercontent.com/52265076/203235727-88efd323-3117-418d-b775-7b7c88efc6a0.png">
