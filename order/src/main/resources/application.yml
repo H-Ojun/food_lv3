@@ -6,7 +6,7 @@ feign:
 hystrix:
   command:
     default:
-      execution.isolation.thread.timeoutInMilliseconds: 500
+      execution.isolation.thread.timeoutInMilliseconds: 5000
 spring:
   application:
     name: order
