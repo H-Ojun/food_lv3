@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Date;
 
-@FeignClient(name = "customer", url = "${api.url.customer}")
-public interface OrderStatusService {
-    @RequestMapping(method= RequestMethod.GET, path="/orderStatuses/{id}")
-    public OrderStatus getOrderStatus(@PathVariable("id") Long id);
+@FeignClient(name = "order", url = "${api.url.order}")
+public interface PaymentService {
+    @RequestMapping(method= RequestMethod.PUT, path="/payments/{id}/cancelpayment")
+    public void cancelPayment(@PathVariable("id") Long id, @RequestBody CancelPaymentCommand cancelPaymentCommand );
 }
 

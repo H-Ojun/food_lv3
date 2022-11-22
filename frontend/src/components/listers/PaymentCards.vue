@@ -69,6 +69,7 @@
             
             me.newValue = {
                 'orderId': '',
+                'cancel': false,
             }
         },
         methods:{

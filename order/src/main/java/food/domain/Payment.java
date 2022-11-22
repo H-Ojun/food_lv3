@@ -19,6 +19,12 @@ public class Payment  {
     private Long id;
 
     private String orderId;
+    
+    
+    
+    
+    
+    private Boolean cancel;
 
     @PostPersist
     public void onPostPersist(){
@@ -27,10 +33,18 @@ public class Payment  {
         paid.publishAfterCommit();  // store status update
 
     }
+    @PreRemove
+    public void onPreRemove(){
+    }
 
     public static PaymentRepository repository(){
         PaymentRepository paymentRepository = OrderApplication.applicationContext.getBean(PaymentRepository.class);
         return paymentRepository;
+    }
+
+    // 주문자의 결제 취소
+    public void cancelPayment(CancelPaymentCommand cancelPaymentCommand){
+        setCancel(cancelPaymentCommand.getCancel());
     }
 
     public static void pay(OrderPlaced orderPlaced){
@@ -42,19 +56,8 @@ public class Payment  {
 
     }
 
-    // 주문자의 결제 취소
-    public static void cancelPayment(OrderCanceled orderCanceled){
-
-        repository().findByOrderId(orderCanceled.getId()).ifPresent(payment->{
-            
-            repository().delete(payment);
-
-         });
-        
-    }
-
     // 요리사의 주문 취소
-    public static void cancelPayment(OrderRejected orderRejected){
+    public static void rejectPayment(OrderRejected orderRejected){
         
         repository().findByOrderId(Long.parseLong(orderRejected.getOrderId())).ifPresent(payment->{
             

@@ -1,7 +1,7 @@
 # 
 
 ## Model
-www.msaez.io/#/storming/uScLlbwrnnZc2szN3LgDOnj8wCy2/81973fe0794c2233ff26faf723b3e0d5
+www.msaez.io/#/storming/uScLlbwrnnZc2szN3LgDOnj8wCy2/b99340c28818b11294fa99012606fea9
 
 ## Before Running Services
 ### Make sure there is a Kafka server running
@@ -36,7 +36,7 @@ mvn spring-boot:run
 - order
 ```
  http :8088/orderLists id="id" foodId="foodId" address="address" status="status" customerId="customerId" 
- http :8088/payments id="id" orderId="orderId" 
+ http :8088/payments id="id" orderId="orderId" cancel="cancel" 
 ```
 - store
 ```

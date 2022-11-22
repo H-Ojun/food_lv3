@@ -68,6 +68,7 @@
                 [
                     { text: "id", value: "id" },
                     { text: "orderId", value: "orderId" },
+                    { text: "cancel", value: "cancel" },
                 ],
             payment : [],
             newValue: {},
@@ -86,6 +87,7 @@
 
             this.newValue = {
                 'orderId': '',
+                'cancel': false,
             }
         },
         methods: {

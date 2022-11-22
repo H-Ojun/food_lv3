@@ -8,6 +8,9 @@
             <div>
                 <String label="OrderId" v-model="item.orderId" :editMode="editMode" @change="change" />
             </div>
+            <div>
+                <Boolean label="Cancel" v-model="item.cancel" :editMode="editMode" @change="change" />
+            </div>
         </v-card-text>
 
         <v-card-actions>
