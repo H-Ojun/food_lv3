@@ -31,51 +31,65 @@
 2. Gateway & Service Router 설치
 3. Autoscale (HPA)
 
+
 # Saga (Pub / Sub)
-상황1 : 주문 상태가 변하면 OrderList에 Sync해준다.
+OrderList에 주문이 추가될시 자동으로 결제된다.
+ - http POST http://a586855b3d92a4ee1883af449339c6ec-100010375.eu-west-3.elb.amazonaws.com:8080/orderLists foodId="1" address="1" status="order" customerId="1" 실행 상태
+ 
+![자동결제](https://user-images.githubusercontent.com/52265076/218928921-ea595fb8-8eaf-49e7-8199-179ffc15b5e7.PNG)
 
-<img width="362" alt="Screen Shot 2022-11-22 at 3 04 54 PM" src="https://user-images.githubusercontent.com/52265076/203237333-39124826-bb4c-43f9-aac1-f0257a7138b5.png">
-<img width="624" alt="Screen Shot 2022-11-22 at 3 02 32 PM" src="https://user-images.githubusercontent.com/52265076/203237083-25d0e227-a26c-45bd-a377-f5bc6e400ed5.png">
-<img width="522" alt="Screen Shot 2022-11-22 at 3 01 55 PM" src="https://user-images.githubusercontent.com/52265076/203237051-3db65cde-40ad-4707-ad86-b71b45d1d46f.png">
-
-상황2 : OrderList에 주문이 추가될시 자동으로 결제된다.
-
-<img width="404" alt="Screen Shot 2022-11-22 at 3 06 39 PM" src="https://user-images.githubusercontent.com/52265076/203237624-9c98a92b-890a-4977-90d7-597bedf2e373.png">
-<img width="650" alt="Screen Shot 2022-11-22 at 3 02 51 PM" src="https://user-images.githubusercontent.com/52265076/203237094-c0892d20-62b6-4cbd-af74-af178afa47d1.png">
-<img width="457" alt="Screen Shot 2022-11-22 at 3 02 10 PM" src="https://user-images.githubusercontent.com/52265076/203237072-f8704fb0-0b6a-474c-9196-e6b90ec4cd99.png">
 
 # CQRS
 OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 같이 주문 상태가 변하는지 확인할 수 있다.
 
-<img width="291" alt="Screen Shot 2022-11-22 at 3 40 10 PM" src="https://user-images.githubusercontent.com/52265076/203242856-cdbb9d60-c6b7-40d4-876e-8d6cb049aeb8.png">
+![cqrs_1](https://user-images.githubusercontent.com/52265076/218929427-a3703f2d-53f0-4487-a62b-32f37b04268f.PNG)
 
-<img width="706" alt="Screen Shot 2022-11-22 at 3 07 19 PM" src="https://user-images.githubusercontent.com/52265076/203237707-f3c54fc3-9827-4fb3-adf9-c3a84fcf5629.png">
+![cqrs_2](https://user-images.githubusercontent.com/52265076/218929449-20ebaddf-2d9e-47c5-8ccc-89f9f4539957.PNG)
+
+![cqrs_3](https://user-images.githubusercontent.com/52265076/218929475-c552d1c4-9b74-4ac9-95b0-2b2a0dcf54ba.PNG)
 
 
 # Compensation / Correlation
-주문하면 아래와 같이 payment에 저장된다. (추가사항 기능으로 payInfo로 확인하였다)
+주문 상태이다.
+orderId 1의 cancel 값이 false 인 것을 알 수 있다.
 
-<img width="801" alt="Screen Shot 2022-11-22 at 3 12 02 PM" src="https://user-images.githubusercontent.com/52265076/203238574-004acbd7-4f2a-4ba7-a0d5-a248ebe35ad2.png">
-<img width="663" alt="Screen Shot 2022-11-22 at 3 12 27 PM" src="https://user-images.githubusercontent.com/52265076/203238585-6eaf9161-010a-4805-b2cd-870150a83439.png">
+![주문1](https://user-images.githubusercontent.com/52265076/218929805-da8c727e-284e-42f2-9bb0-dc126d49cc6d.PNG)
 
-주문을 취소하면 payment의 cancel 값이 true가 되어 주문이 취소된다.
+![결제상태_처음](https://user-images.githubusercontent.com/52265076/218929875-631987ae-e715-4409-ac91-fa3777380bad.PNG)
 
-<img width="465" alt="Screen Shot 2022-11-22 at 3 12 55 PM" src="https://user-images.githubusercontent.com/52265076/203238596-208bce6b-e9f9-450b-a1d1-500bcd061785.png">
-<img width="665" alt="Screen Shot 2022-11-22 at 3 13 04 PM" src="https://user-images.githubusercontent.com/52265076/203238600-90287492-8d6c-48e6-a40f-c1398fc5fb3e.png">
+주문을 취소하면 orderId 1의 cancel 값이 true가 되어 주문이 취소된다.
 
-실제 코드 내역이다.
+![주문1취소](https://user-images.githubusercontent.com/52265076/218929815-7f7f0376-0523-427e-b25b-769fa61a2c7b.PNG)
 
-<img width="519" alt="Screen Shot 2022-11-22 at 3 14 07 PM" src="https://user-images.githubusercontent.com/52265076/203238776-4b7acafa-2065-41fa-aee0-562f6d68515a.png">
+![결제상태_취소](https://user-images.githubusercontent.com/52265076/218929883-90200750-43d8-44d0-9fff-bc92a5687233.PNG)
 
 
 # Deploy to EKS Cluster
+AWS에서 user19-eks의 Cluster Nodes 를 가져온다.
 
+![eks_cluster](https://user-images.githubusercontent.com/52265076/218930261-590f00fe-38dd-47d3-8bf9-ea48e0bc664e.PNG)
+
+gitPod에서 kubectl로 확인된 AWS Node이다.
+
+![eks_cluster2](https://user-images.githubusercontent.com/52265076/218930272-34838afa-312c-4506-8207-9bc2928c8f67.PNG)
+
+helm을 사용해 Kafka를 설치한 상태이다.
+
+![eks_cluster3](https://user-images.githubusercontent.com/52265076/218930277-70b36a42-de80-45b1-af13-ffc3beed0f87.PNG)
 
 
 # Gateway & Service Router 설치
+customer, gateway, order, rider, store 서비스를 설치한 상태이다.
 
+![gateway_service_router](https://user-images.githubusercontent.com/52265076/218930756-5102de3e-dbdb-4d8e-97d9-c86473b064ee.PNG)
 
 
 # Autoscale (HPA)
+autoscale 설정한 상태의 모습이다.
 
+![autoscale](https://user-images.githubusercontent.com/52265076/218930977-b9037a5e-3fae-4b76-baeb-f2d101ebb6b0.PNG)
 
+siege -c20 -t40S -v http://order:8080/orderLists 를 활용해
+autoscale이 동작하는 모습이다.
+
+![autoscale2](https://user-images.githubusercontent.com/52265076/218930987-520b5747-df75-4db6-924a-324614e48c49.PNG)
