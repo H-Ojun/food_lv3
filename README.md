@@ -38,6 +38,11 @@ OrderList에 주문이 추가될시 자동으로 결제된다.
  
 ![자동결제](https://user-images.githubusercontent.com/52265076/218928921-ea595fb8-8eaf-49e7-8199-179ffc15b5e7.PNG)
 
+구현 코드이다.
+![pub_sub1](https://user-images.githubusercontent.com/52265076/218935449-140db6e6-797b-453a-809d-2e512a196821.PNG)
+![pub_sub2](https://user-images.githubusercontent.com/52265076/218935453-80513604-72ff-40e5-b1d9-d06ee686561b.PNG)
+![pub_sub3](https://user-images.githubusercontent.com/52265076/218935454-9ecfcd38-4872-4192-8d92-c7ec0fc61a3c.PNG)
+
 
 # CQRS
 OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 같이 주문 상태가 변하는지 확인할 수 있다.
@@ -47,6 +52,12 @@ OrderPlace, Paid, OrderAccept, OrderReject, OrderStart, OrderFinish, Pick 와 �
 ![cqrs_2](https://user-images.githubusercontent.com/52265076/218929449-20ebaddf-2d9e-47c5-8ccc-89f9f4539957.PNG)
 
 ![cqrs_3](https://user-images.githubusercontent.com/52265076/218929475-c552d1c4-9b74-4ac9-95b0-2b2a0dcf54ba.PNG)
+
+구현 코드이다.
+![cqrs_image1](https://user-images.githubusercontent.com/52265076/218935423-35741eab-844b-4aae-aac2-105475897a77.PNG)
+![cqrs_image2](https://user-images.githubusercontent.com/52265076/218935438-6910416a-d6cc-4112-9319-e8406ae1a530.PNG)
+![cqrs_image3](https://user-images.githubusercontent.com/52265076/218935441-cd7d7983-97e0-46d7-af70-3b72bb691db7.PNG)
+![cqrs_image4](https://user-images.githubusercontent.com/52265076/218935446-b0a7ea60-bd8e-43b7-b629-9dd9d91f0ac6.PNG)
 
 
 # Compensation / Correlation
